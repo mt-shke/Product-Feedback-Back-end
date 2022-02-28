@@ -100,7 +100,13 @@ const login = async (req, res) => {
 
 		refreshToken = existingToken.refreshToken;
 		attachCookiesToResponse({ res, user: tokenUser, refreshToken });
-		return res.status(StatusCodes.OK).json({ user: tokenUser, success: true, message: "User now logged in" });
+
+		res.status(StatusCodes.OK).json({
+			user: tokenUser,
+			success: true,
+			message: "User now logged in",
+		});
+		return;
 	}
 
 	refreshToken = crypto.randomBytes(50).toString("hex");
@@ -111,14 +117,20 @@ const login = async (req, res) => {
 
 	await TokenModel.create(userToken);
 	attachCookiesToResponse({ res, user: tokenUser, refreshToken });
-	return res.status(StatusCodes.OK).json({ user: tokenUser, success: true, message: "User now logged in" });
+
+	res.status(StatusCodes.OK).json({
+		user: tokenUser,
+		success: true,
+		message: "User now logged in",
+	});
+	return;
 };
 
 // Logout function
 const logout = async (req, res) => {
 	await TokenModel.findOneAndDelete({ user: req.user.userId });
 	removeCookies({ res });
-	return res.status(StatusCodes.OK).json({ success: true, message: "User now logged out!" });
+	res.status(StatusCodes.OK).json({ success: true, message: "User now logged out!" });
 };
 
 const verifyUserCookie = async (req, res) => {
