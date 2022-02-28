@@ -94,7 +94,7 @@ const login = async (req, res) => {
 	if (existingToken) {
 		const { isValid } = existingToken;
 		if (!isValid) {
-			// true by default, but if user does unauthorized action, can be turned false
+			// true by default, but if user does unauthorized action, it can be turned false
 			throw new CustomError.UnauthenticatedError("Token is invalid");
 		}
 
