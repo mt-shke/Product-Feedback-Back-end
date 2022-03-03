@@ -36,7 +36,12 @@ app.use(xss());
 // CORS
 // app.use(cors());
 // app.use(cors({ origin: "http://localhost:3000", credentials: true }));
-app.use(cors({ origin: ["https://fm-pfeedback.netlify.app", "http://localhost:3000"], credentials: true }));
+app.use(
+	cors({
+		origin: ["https://fm-pfeedback.netlify.app", "http://localhost:3000", "https://pfeedback.micheltcha.com"],
+		credentials: true,
+	})
+);
 // app.use(
 // 	cors({
 // 		origin: "https://fm-pfeedback.netlify.app",

@@ -106,7 +106,6 @@ const login = async (req, res) => {
 			success: true,
 			message: "User now logged in",
 		});
-		return;
 	}
 
 	refreshToken = crypto.randomBytes(50).toString("hex");
