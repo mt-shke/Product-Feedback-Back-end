@@ -17,7 +17,7 @@ const attachCookiesToResponse = ({ res, user, refreshToken }) => {
 		httpOnly: true,
 		secure: process.env.NODE_ENV === "production",
 		// domain: ".micheltcha.com",
-		domain: "localhost",
+		domain: "localhost:3000",
 
 		signed: true,
 		expires: new Date(Date.now() + TOKEN_15MINUTES),
@@ -25,7 +25,8 @@ const attachCookiesToResponse = ({ res, user, refreshToken }) => {
 	res.cookie("refreshToken", refreshTokenJWT, {
 		httpOnly: true,
 		secure: process.env.NODE_ENV === "production",
-		domain: "localhost",
+		domain: "localhost:3000",
+
 		signed: true,
 		expires: new Date(Date.now() + TOKEN_30DAYS),
 	});
@@ -35,14 +36,15 @@ const removeCookies = ({ res }) => {
 	res.cookie("accessToken", "logout", {
 		httpOnly: true,
 		secure: process.env.NODE_ENV === "production",
-		domain: "localhost",
+		domain: "localhost:3000",
+
 		signed: true,
 		expires: new Date(Date.now()),
 	});
 	res.cookie("refreshToken", "logout", {
 		httpOnly: true,
 		secure: process.env.NODE_ENV === "production",
-		domain: "localhost",
+		domain: "localhost:3000",
 
 		signed: true,
 		expires: new Date(Date.now()),
