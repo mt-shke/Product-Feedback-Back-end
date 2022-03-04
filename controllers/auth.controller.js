@@ -77,7 +77,7 @@ const login = async (req, res) => {
 	console.log("forwardedHost:", forwardedHost);
 	console.log("forwardedProtocol:", forwardedProtocol);
 
-	return res.status(200).json({ protocol, host, origin, forwardedHost, forwardedProtocol });
+	// return res.status(200).json({ protocol, host, origin, forwardedHost, forwardedProtocol });
 
 	const { email, password } = req.body;
 	if (!email || !password) {
