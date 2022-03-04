@@ -101,7 +101,7 @@ const login = async (req, res) => {
 		refreshToken = existingToken.refreshToken;
 		attachCookiesToResponse({ res, user: tokenUser, refreshToken });
 
-		res.status(StatusCodes.OK).json({
+		return res.status(StatusCodes.OK).json({
 			user: tokenUser,
 			success: true,
 			message: "User now logged in",
@@ -113,16 +113,15 @@ const login = async (req, res) => {
 	const userAgent = req.headers["user-agent"];
 	const ip = req.ip;
 	const userToken = { refreshToken, ip, userAgent, user: user._id };
-
 	await TokenModel.create(userToken);
+
 	attachCookiesToResponse({ res, user: tokenUser, refreshToken });
 
-	res.status(StatusCodes.OK).json({
+	return res.status(StatusCodes.OK).json({
 		user: tokenUser,
 		success: true,
 		message: "User now logged in",
 	});
-	return;
 };
 
 // Logout function
