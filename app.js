@@ -25,6 +25,7 @@ const NotFoundMiddleware = require("./middleware/not-found");
 const ErrorHandlerMiddleware = require("./middleware/error-handler");
 
 // app.use
+app.set("trust proxy", 1);
 app.use(
 	rateLimiter({
 		windowMs: 15 * 60 * 1000,
@@ -36,7 +37,12 @@ app.use(xss());
 // CORS
 app.use(
 	cors({
-		origin: ["https://fm-pfeedback.netlify.app", "http://localhost:3000", "https://pfeedback.micheltcha.com"],
+		origin: [
+			"https://fm-pfeedback.netlify.app",
+			"http://localhost:3000",
+			"https://pfeedback.micheltcha.com",
+			"https://micheltcha.com",
+		],
 		credentials: true,
 	})
 );

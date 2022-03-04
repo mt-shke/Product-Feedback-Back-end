@@ -66,16 +66,10 @@ const verifyEmail = async (req, res) => {
 // Login function
 const login = async (req, res) => {
 	const protocol = req.protocol;
-	const host = req.host;
+	const hostname = req.hostname;
 	const origin = req.get("origin");
 	const forwardedHost = req.get("x-forwarded-host");
 	const forwardedProtocol = req.get("x-forwarded-proto");
-
-	console.log("host:", host);
-	console.log("protocol:", protocol);
-	console.log("origin:", origin);
-	console.log("forwardedHost:", forwardedHost);
-	console.log("forwardedProtocol:", forwardedProtocol);
 
 	// return res.status(200).json({ protocol, host, origin, forwardedHost, forwardedProtocol });
 
