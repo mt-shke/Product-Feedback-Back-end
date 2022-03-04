@@ -17,7 +17,6 @@ const attachCookiesToResponse = ({ res, user, refreshToken }) => {
 		httpOnly: true,
 		secure: process.env.NODE_ENV === "production",
 		domain: ".micheltcha.com",
-
 		signed: true,
 		expires: new Date(Date.now() + TOKEN_15MINUTES),
 	});
