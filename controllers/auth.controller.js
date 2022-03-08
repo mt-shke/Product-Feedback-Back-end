@@ -28,20 +28,23 @@ const register = async (req, res) => {
 		email,
 		password,
 		username,
+		verificationToken,
 		// role: isFirstAccount ? "admin" : "user",
 	});
 
-	if (newUser) {
-		await sendUserVerificationEmail({
-			email: newUser.email,
-			verificationToken: newUser.verificationToken,
-		});
-		return res
-			.status(StatusCodes.CREATED)
-			.json({ succes: true, message: "Account created successfully!", verificationToken });
-	} else {
+	if (!newUser) {
 		throw new CustomError.BadRequestError("Account creation impossible");
 	}
+
+	await sendUserVerificationEmail({
+		email: newUser.email,
+		verificationToken: newUser.verificationToken,
+	});
+	return res.status(StatusCodes.CREATED).json({
+		success: true,
+		message: "Account created successfully! Please check your email and activate your account!",
+		verificationToken,
+	});
 };
 
 // Verifiy Email account
@@ -52,6 +55,11 @@ const verifyEmail = async (req, res) => {
 	}
 
 	const user = await UserModel.findOne({ email });
+
+	if (user.isVerified) {
+		return res.status(StatusCodes.OK).json({ message: "Email already verified! ", success: true });
+	}
+
 	if (user.verificationToken !== verificationToken) {
 		throw new CustomError.UnauthenticatedError("Token invalid");
 	}
