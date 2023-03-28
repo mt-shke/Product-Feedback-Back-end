@@ -1,3 +1,10 @@
+<h1 style='padding:1rem;font-weight:bold' align='center'>Product Feedback Back End</h1>
+
+## Presentation
+
+- Back end API for the Product Feedback app
+- Using Node/Express, MongoDB/Mongoose
+
 <details>
 <summary>Deploy to Heroku</summary>
 
